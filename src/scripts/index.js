@@ -3,8 +3,6 @@ import '../styles/main.css';
 import '../styles/responsive.css';
 import DATA from '../public/data/DATA.json';
 
-console.log('Hello Coders! :)');
-
 const renderRestaurants = () => {
     const restaurantsContainer = document.getElementById('restaurants');
     DATA.restaurants.forEach((restaurant) => {
@@ -29,17 +27,13 @@ const renderRestaurants = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const drawerToggle = document.querySelector('.drawer-toggle');
-    const drawerClose = document.querySelector('.drawer-close');
     const navMenu = document.querySelector('.nav-menu');
 
     drawerToggle.addEventListener('click', () => {
-        navMenu.classList.add('active');
+        navMenu.classList.toggle('active');
     });
 
-    drawerClose.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-    });
-
+    // Close menu when clicking outside
     document.addEventListener('click', (event) => {
         if (!navMenu.contains(event.target) && !drawerToggle.contains(event.target)) {
             navMenu.classList.remove('active');
