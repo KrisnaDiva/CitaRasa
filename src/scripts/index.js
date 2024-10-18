@@ -1,8 +1,29 @@
-import 'regenerator-runtime'; /* for async await transpile */
+import 'regenerator-runtime'; 
 import '../styles/main.css';
 import '../styles/responsive.css';
+import DATA from '../public/data/DATA.json';
 
 console.log('Hello Coders! :)');
+
+const renderRestaurants = () => {
+    const restaurantsContainer = document.getElementById('restaurants');
+    DATA.restaurants.forEach((restaurant) => {
+        const restaurantElement = document.createElement('div');
+        restaurantElement.className = 'restaurant-item';
+        restaurantElement.innerHTML = `
+            <img src="${restaurant.pictureId}" alt="${restaurant.name}">
+            <div class="restaurant-info">
+                <div class="restaurant-header">
+                    <h2 class="restaurant-name">${restaurant.name}</h2>
+                    <p class="restaurant-rating">⭐ ${restaurant.rating}</p>
+                </div>
+                <p class="restaurant-city">📍 ${restaurant.city}</p>
+                <p class="restaurant-description">${restaurant.description.slice(0, 150)}...</p>
+            </div>
+        `;
+        restaurantsContainer.appendChild(restaurantElement);
+    });
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     const drawerToggle = document.querySelector('.drawer-toggle');
@@ -17,10 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
         navMenu.classList.remove('active');
     });
 
-    // Close menu when clicking outside
     document.addEventListener('click', (event) => {
         if (!navMenu.contains(event.target) && !drawerToggle.contains(event.target)) {
             navMenu.classList.remove('active');
         }
     });
+
+    renderRestaurants();
 });
