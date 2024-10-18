@@ -11,13 +11,15 @@ const renderRestaurants = () => {
         const restaurantElement = document.createElement('div');
         restaurantElement.className = 'restaurant-item';
         restaurantElement.innerHTML = `
-            <img src="${restaurant.pictureId}" alt="${restaurant.name}">
+            <div class="restaurant-image-container">
+                <img src="${restaurant.pictureId}" alt="${restaurant.name}">
+                <span class="restaurant-city">📍 ${restaurant.city}</span>
+            </div>
             <div class="restaurant-info">
                 <div class="restaurant-header">
                     <h2 class="restaurant-name">${restaurant.name}</h2>
                     <p class="restaurant-rating">⭐ ${restaurant.rating}</p>
                 </div>
-                <p class="restaurant-city">📍 ${restaurant.city}</p>
                 <p class="restaurant-description">${restaurant.description.slice(0, 150)}...</p>
             </div>
         `;
