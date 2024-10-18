@@ -7,29 +7,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <a href="#maincontent" class="skip-link">Skip to content</a>
+    
     <header class="app-bar">
-        <a href="/" class="brand">Cita Rasa</a>
-        <nav>
-            <button class="drawer-toggle" aria-label="Toggle menu">☰</button>
-            <ul class="nav-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="#">Favorite</a></li>
-                <li><a href="https://github.com/KrisnaDiva" target="_blank">About Us</a></li>
-            </ul>
-        </nav>
+        <div class="app-bar-container">
+            <h1 class="brand">
+                <a href="/" class="brand-link">Cita Rasa</a>
+            </h1>
+            
+            <nav id="navigation" aria-label="Main Navigation">
+                <button id="drawer-toggle" class="drawer-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">☰</button>
+                <ul id="nav-menu" class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#favorite">Favorite</a></li>
+                    <li><a href="https://github.com/KrisnaDiva" target="_blank" rel="noopener">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section class="hero">
+    <main id="maincontent">
+        <section class="hero" aria-label="Hero banner">
             <div class="hero-content">
-                <h1>Discover Amazing Restaurants</h1>
+                <h2>Discover Amazing Restaurants</h2>
                 <p>Find the best dining experiences in your area with Cita Rasa, your ultimate restaurant finder.</p>
             </div>
         </section>
-        <section class="content-label">
-            <h2>Explore Restaurants</h2>
-        </section>
-        <section id="restaurants" class="restaurants">
+        
+        <section class="content">
+            <div class="content-label">
+                <h2>Explore Restaurants</h2>
+            </div>
+            <div id="restaurants" class="restaurants">
+                <!-- Restaurant items will be dynamically inserted here -->
+            </div>
         </section>
     </main>
 

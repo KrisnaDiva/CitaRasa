@@ -10,7 +10,7 @@ const renderRestaurants = () => {
         restaurantElement.className = 'restaurant-item';
         restaurantElement.innerHTML = `
             <div class="restaurant-image-container">
-                <img src="${restaurant.pictureId}" alt="${restaurant.name}">
+                <img src="${restaurant.pictureId}" alt="Gambar restoran ${restaurant.name}">
                 <span class="restaurant-city">📍 ${restaurant.city}</span>
             </div>
             <div class="restaurant-info">
@@ -29,14 +29,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const drawerToggle = document.querySelector('.drawer-toggle');
     const navMenu = document.querySelector('.nav-menu');
 
-    drawerToggle.addEventListener('click', () => {
+    const toggleMenu = () => {
+        const isExpanded = drawerToggle.getAttribute('aria-expanded') === 'true';
+        drawerToggle.setAttribute('aria-expanded', !isExpanded);
         navMenu.classList.toggle('active');
+    };
+
+    drawerToggle.addEventListener('click', toggleMenu);
+
+    drawerToggle.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            toggleMenu();
+        }
     });
 
-    // Close menu when clicking outside
     document.addEventListener('click', (event) => {
         if (!navMenu.contains(event.target) && !drawerToggle.contains(event.target)) {
             navMenu.classList.remove('active');
+            drawerToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            drawerToggle.setAttribute('aria-expanded', 'false');
+            drawerToggle.focus();
+        }
+    });
+
+    navMenu.addEventListener('keydown', (event) => {
+        if (event.key === 'Tab') {
+            const focusableElements = navMenu.querySelectorAll('a, button');
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (event.shiftKey && document.activeElement === firstElement) {
+                event.preventDefault();
+                lastElement.focus();
+            } else if (!event.shiftKey && document.activeElement === lastElement) {
+                event.preventDefault();
+                firstElement.focus();
+            }
         }
     });
 
