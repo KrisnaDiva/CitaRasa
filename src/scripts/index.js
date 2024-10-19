@@ -2,6 +2,7 @@ import 'regenerator-runtime';
 import '../styles/main.css';
 import '../styles/responsive.css';
 import DATA from '../public/data/DATA.json';
+import TESTIMONIALS from '../public/data/testimoni.json';
 
 const renderRestaurants = () => {
     const restaurantsContainer = document.getElementById('restaurants');
@@ -23,6 +24,45 @@ const renderRestaurants = () => {
         `;
         restaurantsContainer.appendChild(restaurantElement);
     });
+};
+
+const renderTestimonials = () => {
+    const testimonialsContainer = document.querySelector('.testimonials-carousel');
+    let currentIndex = 0;
+
+    const renderTestimonial = (index) => {
+        const testimonial = TESTIMONIALS.testimonials[index];
+        testimonialsContainer.innerHTML = `
+            <div class="testimonial-item active">
+                <img src="https://picsum.photos/seed/${testimonial.name}/200" alt="${testimonial.name}" class="testimonial-avatar">
+                <p class="testimonial-comment">"${testimonial.comment}"</p>
+                <div class="testimonial-info">
+                    <p class="testimonial-name">${testimonial.name}</p>
+                    <p class="testimonial-rating">Rating: ${'★'.repeat(testimonial.rating)}${'☆'.repeat(5 - testimonial.rating)}</p>
+                </div>
+                <p class="testimonial-date">${new Date(testimonial.date).toLocaleDateString()}</p>
+            </div>
+            <div class="testimonial-navigation">
+                <button class="prev-testimonial">Previous</button>
+                <button class="next-testimonial">Next</button>
+            </div>
+        `;
+
+        const prevButton = testimonialsContainer.querySelector('.prev-testimonial');
+        const nextButton = testimonialsContainer.querySelector('.next-testimonial');
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + TESTIMONIALS.testimonials.length) % TESTIMONIALS.testimonials.length;
+            renderTestimonial(currentIndex);
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % TESTIMONIALS.testimonials.length;
+            renderTestimonial(currentIndex);
+        });
+    };
+
+    renderTestimonial(currentIndex);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -76,4 +116,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     renderRestaurants();
+    renderTestimonials();
 });

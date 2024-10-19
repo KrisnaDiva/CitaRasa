@@ -251,6 +251,115 @@ body {
   line-height: 1.4;
 }
 
+.testimonials {
+  background-color: #f9f9f9;
+  padding-bottom: 4rem;
+}
+
+.testimonials .content-label {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.testimonials .content-label h2 {
+  font-size: 2rem;
+  color: #ff6b6b;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #ff6b6b;
+}
+
+.testimonials-carousel {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.testimonial-item {
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.testimonial-item.active {
+  opacity: 1;
+  position: relative;
+}
+
+.testimonial-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1rem;
+  border: 3px solid #ff6b6b;
+}
+
+.testimonial-comment {
+  font-style: italic;
+  margin-bottom: 1rem;
+  color: #2d3436;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.testimonial-info {
+  margin-top: 1rem;
+}
+
+.testimonial-name {
+  font-weight: bold;
+  color: #ff6b6b;
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-rating {
+  color: #f1c40f;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-date {
+  font-size: 0.9rem;
+  color: #95a5a6;
+}
+
+.testimonial-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.prev-testimonial,
+.next-testimonial {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.prev-testimonial:hover,
+.next-testimonial:hover {
+  background-color: #ff4757;
+}
+
+.prev-testimonial:focus,
+.next-testimonial:focus {
+  outline: 2px solid var(--secondary-color);
+}
+
 footer {
   background-color: var(--primary-color);
   color: white;
