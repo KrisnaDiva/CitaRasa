@@ -88,6 +88,8 @@ const renderTestimonials = () => {
 document.addEventListener('DOMContentLoaded', () => {
     const drawerToggle = document.querySelector('.drawer-toggle');
     const navMenu = document.querySelector('.nav-menu');
+    const skipLink = document.querySelector('.skip-link');
+    const mainContent = document.getElementById('maincontent');
 
     const toggleMenu = () => {
         const isExpanded = drawerToggle.getAttribute('aria-expanded') === 'true';
@@ -119,21 +121,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    navMenu.addEventListener('keydown', (event) => {
+    const handleNavigation = (event) => {
         if (event.key === 'Tab') {
-            const focusableElements = navMenu.querySelectorAll('a, button');
+            const focusableElements = navMenu.querySelectorAll('a');
             const firstElement = focusableElements[0];
             const lastElement = focusableElements[focusableElements.length - 1];
 
             if (event.shiftKey && document.activeElement === firstElement) {
                 event.preventDefault();
-                lastElement.focus();
+                drawerToggle.focus();
             } else if (!event.shiftKey && document.activeElement === lastElement) {
                 event.preventDefault();
-                firstElement.focus();
+                mainContent.focus();
             }
         }
+    };
+
+    navMenu.addEventListener('keydown', handleNavigation);
+
+    drawerToggle.addEventListener('keydown', (event) => {
+        if (event.key === 'Tab' && !event.shiftKey) {
+            event.preventDefault();
+            navMenu.querySelector('a').focus();
+        }
     });
+
+    skipLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        mainContent.focus();
+    });
+
+    mainContent.tabIndex = -1;
 
     renderRestaurants();
     renderTestimonials();

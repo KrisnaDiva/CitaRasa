@@ -32,6 +32,10 @@ body {
   min-height: 100vh;
 }
 
+main:focus {
+  outline: none;
+}
+
 .skip-link {
   position: absolute;
   top: -40px;
@@ -39,13 +43,14 @@ body {
   background: $primary-color;
   color: $white;
   padding: 8px;
-  z-index: 100;
+  z-index: 1001; 
   transition: top 0.3s;
   @include touch-target;
   @include flex-center;
 
   &:focus {
     top: 0;
+    position: fixed; 
   }
 }
 
