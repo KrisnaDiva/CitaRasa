@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cita Rasa - Restaurant Finder</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
     <a href="#maincontent" class="skip-link">Skip to content</a>
-    
-    <header class="app-bar">
+
+    <header class="app-bar" role="banner">
         <div class="app-bar-container">
             <h1 class="brand">
                 <a href="/" class="brand-link">Cita Rasa</a>
             </h1>
-            
-            <nav id="navigation" aria-label="Main Navigation">
-                <button id="drawer-toggle" class="drawer-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">☰</button>
+
+            <nav id="navigation" aria-label="Main Navigation" role="navigation">
+                <button id="drawer-toggle" class="drawer-toggle" aria-label="Toggle menu" aria-expanded="false"
+                    aria-controls="nav-menu">☰</button>
                 <ul id="nav-menu" class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="#favorite">Favorite</a></li>
@@ -26,36 +30,36 @@
         </div>
     </header>
 
-    <main id="maincontent">
+    <main id="maincontent" role="main">
         <section class="hero" aria-label="Hero banner">
             <div class="hero-content">
-                <h2>Discover Amazing Restaurants</h2>
-                <p>Find the best dining experiences in your area with Cita Rasa, your ultimate restaurant finder.</p>
+                <h2>Temukan Restoran Menakjubkan</h2>
+                <p>Temukan pengalaman bersantap terbaik di daerah Anda dengan Cita Rasa, pencari restoran terbaik Anda.
+                </p>
             </div>
         </section>
-        
+
         <section class="content">
             <div class="content-label">
-                <h2>Explore Restaurants</h2>
+                <h2>Jelajahi Restoran</h2>
             </div>
             <div id="restaurants" class="restaurants">
-                <!-- Restaurant items will be dynamically inserted here -->
             </div>
         </section>
 
         <section class="testimonials">
             <div class="content-label">
-                <h2>What Our Users Say</h2>
+                <h2>Apa Kata Pengguna Kami</h2>
             </div>
             <div class="testimonials-carousel">
-                <!-- Testimonial items will be dynamically inserted here -->
             </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Cita Rasa. All rights reserved.</p>
+    <footer role="contentinfo">
+        <p> Copyright &copy; 2024 - Cita Rasa</p>
     </footer>
 
 </body>
+
 </html>
