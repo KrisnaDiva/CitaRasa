@@ -10,7 +10,7 @@ const renderRestaurants = () => {
         const restaurantElement = document.createElement('div');
         restaurantElement.className = 'restaurant-item';
         restaurantElement.innerHTML = `
-            <img src="${restaurant.pictureId}" alt="Gambar restoran ${restaurant.name}" class="restaurant-img">
+            <img src="${restaurant.pictureId}" alt="restoran ${restaurant.name}" class="restaurant-img">
             <div class="restaurant-info">
                 <div class="restaurant-header">
                     <h2 class="restaurant-name">${restaurant.name}</h2>
