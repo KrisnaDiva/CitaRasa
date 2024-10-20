@@ -38,7 +38,7 @@ const renderTestimonials = () => {
         const testimonial = TESTIMONI.testimonials[index];
         testimonialsContainer.innerHTML = `
             <div class="testimonial-item active">
-                <img src="https://picsum.photos/seed/${testimonial.name}/200" alt="Avatar of ${testimonial.name}" class="testimonial-avatar">
+                <img src="https://picsum.photos/seed/${testimonial.name}/200" alt="Gambar ${testimonial.name}" class="testimonial-avatar">
                 <p class="testimonial-comment">"${testimonial.comment}"</p>
                 <div class="testimonial-info">
                     <p class="testimonial-name">${testimonial.name}</p>
@@ -47,8 +47,8 @@ const renderTestimonials = () => {
                 <p class="testimonial-date">${new Date(testimonial.date).toLocaleDateString()}</p>
             </div>
             <div class="testimonial-navigation">
-                <button class="prev-testimonial" aria-label="Previous testimonial"><</button>
-                <button class="next-testimonial" aria-label="Next testimonial">></button>
+                <button class="prev-testimonial" aria-label="Testimoni sebelumnya"><</button>
+                <button class="next-testimonial" aria-label="Testimoni selanjutnya">></button>
             </div>
         `;
 
