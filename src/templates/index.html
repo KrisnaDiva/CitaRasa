@@ -3,39 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cita Rasa - Temukan restoran terbaik di sekitar Anda. Jelajahi beragam pilihan kuliner, baca ulasan, dan temukan pengalaman bersantap yang menakjubkan dengan mudah.">
-    <title>Cita Rasa - Restaurant Finder</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="description" content="Discover great restaurants near you">
+    <meta name="theme-color" content="#ff6b6b"/>
+    
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link rel="icon" href="./favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="manifest" href="./app.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Cita Rasa</title>
 </head>
 <body>
-    <a href="#maincontent" class="skip-link">Skip to content</a>
-
-    <header class="app-bar" role="banner">
+    <a href="#mainContent" class="skip-link">Skip to content</a>
+    
+    <header class="app-bar">
         <div class="app-bar-container">
-            <h1 class="brand">
-                <a href="/" class="brand-link">Cita Rasa</a>
-            </h1>
-
-            <nav id="navigation" aria-label="Main Navigation" role="navigation">
-                <button id="drawer-toggle" class="drawer-toggle" aria-label="Toggle menu" aria-expanded="false"
-                    aria-controls="nav-menu">☰</button>
-                <ul id="nav-menu" class="nav-menu">
-                    <li><a href="#/">Home</a></li>
-                    <li><a href="#">Favorite</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="https://github.com/KrisnaDiva" target="_blank" rel="noopener">About Us</a></li>
+            <div class="app-bar__menu">
+                <button id="hamburgerButton" aria-label="navigation menu">☰</button>
+            </div>
+            <div class="app-bar__brand">
+                <h1>Cita Rasa</h1>
+            </div>
+            <nav id="navigationDrawer" class="app-bar__navigation">
+                <ul>
+                    <li><a href="#/"><i class="fa-solid fa-home"></i>Home</a></li>
+                    <li><a href="#/favorite"><i class="fa-solid fa-heart"></i>Favorite</a></li>
+                    <li><a href="https://github.com/yourusername" target="_blank" rel="noopener">
+                        <i class="fa-solid fa-user"></i>About Us
+                    </a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main id="maincontent" role="main" tabindex="-1">
-        <!-- Content will be rendered here by JavaScript -->
-    </main>
 
-    <footer role="contentinfo">
-        <p>Copyright &copy; 2024 - Cita Rasa</p>
-    </footer>
+    <main id="mainContent" tabindex="0"></main>
+    <app-footer copyright="©" year="2024" brand="Cita Rasa"></app-footer>
+
 </body>
 </html>

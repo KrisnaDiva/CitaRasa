@@ -1,26 +1,94 @@
 import UrlParser from '../../routes/url-parser';
 import RestaurantSource from '../../data/restaurant-source';
 import { createRestaurantDetailTemplate } from '../templates/template-creator';
+import LikeButtonInitiator from '../../utils/like-button-initiator';
 
 const Detail = {
   async render() {
     return `
-      <div id="restaurant" class="restaurant"></div>
+      <div class="restaurant-detail" id="restaurant">
+        <div class="loader-container">
+          <div class="loader"></div>
+          <p class="loader-text">Loading restaurant details...</p>
+        </div>
+      </div>
+      <div id="likeButtonContainer"></div>
     `;
   },
 
   async afterRender() {
     try {
-      const url = UrlParser.parseActiveUrlWithoutCombiner();
-      const restaurant = await RestaurantSource.detailRestaurant(url.id);
       const restaurantContainer = document.querySelector('#restaurant');
-      restaurantContainer.innerHTML = createRestaurantDetailTemplate(restaurant);
+      const likeButtonContainer = document.querySelector('#likeButtonContainer');
+      const url = UrlParser.parseActiveUrlWithoutCombiner();
+      const restaurant = await RestaurantSource.detail(url.id);
+
+      if (restaurant) {
+        restaurantContainer.innerHTML = createRestaurantDetailTemplate(restaurant);
+
+        const reviewForm = document.querySelector('#reviewForm');
+        if (reviewForm) {
+          reviewForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const reviewData = {
+              id: url.id,
+              name: document.querySelector('#reviewName').value,
+              review: document.querySelector('#reviewText').value,
+            };
+
+            try {
+              const response = await RestaurantSource.postReview(reviewData);
+              const reviewsContainer = document.querySelector('.reviews-container');
+              reviewsContainer.innerHTML = response.customerReviews.map((review) => `
+                <div class="review-card">
+                  <div class="review-header">
+                    <img 
+                      src="https://ui-avatars.com/api/?name=${review.name}&background=random" 
+                      alt="${review.name}"
+                      class="review-avatar"
+                    >
+                    <div class="review-info">
+                      <p class="review-name">${review.name}</p>
+                      <p class="review-date">${review.date}</p>
+                    </div>
+                  </div>
+                  <p class="review-text">${review.review}</p>
+                </div>
+              `).join('');
+
+              reviewForm.reset();
+            } catch (error) {
+              console.error('Review Error:', error);
+              alert('Failed to submit review. Please try again.');
+            }
+          });
+        }
+
+        await LikeButtonInitiator.init({
+          likeButtonContainer,
+          restaurant: {
+            id: restaurant.id,
+            name: restaurant.name,
+            description: restaurant.description,
+            pictureId: restaurant.pictureId,
+            rating: restaurant.rating,
+            city: restaurant.city,
+          },
+        });
+      } else {
+        throw new Error('Restaurant not found');
+      }
     } catch (error) {
       console.error('Error:', error);
       const restaurantContainer = document.querySelector('#restaurant');
       restaurantContainer.innerHTML = `
         <div class="error">
-          <p>Error loading restaurant details. Please try again later.</p>
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <p>Failed to load restaurant detail</p>
+          <p>${error.message || 'Please check your connection and try again'}</p>
+          <button class="error-button" onclick="location.reload()">
+            <i class="fa-solid fa-rotate"></i> Retry
+          </button>
         </div>
       `;
     }

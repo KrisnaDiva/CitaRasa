@@ -11,12 +11,12 @@ const DrawerInitiator = {
 
   _toggleDrawer(event, drawer) {
     event.stopPropagation();
-    drawer.classList.toggle('active');
+    drawer.classList.toggle('open');
   },
 
   _closeDrawer(event, drawer) {
     event.stopPropagation();
-    drawer.classList.remove('active');
+    drawer.classList.remove('open');
   },
 };
 

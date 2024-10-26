@@ -1,11 +1,10 @@
-import CONFIG from '../../globals/config';
-
 const createRestaurantItemTemplate = (restaurant) => `
   <a href="#/detail/${restaurant.id}" class="restaurant-item">
     <img 
-      src="${CONFIG.BASE_IMAGE_URL.MEDIUM + restaurant.pictureId}" 
+      src="https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}" 
       alt="restoran ${restaurant.name}" 
       class="restaurant-img"
+      loading="lazy"
     >
     <div class="restaurant-info">
       <div class="restaurant-header">
@@ -26,7 +25,7 @@ const createRestaurantItemTemplate = (restaurant) => `
 
 const createRestaurantDetailTemplate = (restaurant) => `
   <div class="restaurant-detail">
-    <div class="detail-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${CONFIG.BASE_IMAGE_URL.LARGE + restaurant.pictureId}')">
+    <div class="detail-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}')">
       <div class="detail-hero-content">
         <h2 class="restaurant-name">${restaurant.name}</h2>
         <div class="restaurant-meta">
@@ -84,16 +83,46 @@ const createRestaurantDetailTemplate = (restaurant) => `
       </section>
 
       <section class="detail-section">
-        <h3><i class="fa-solid fa-comments"></i> Customer Reviews</h3>
+        <div class="customer-review">
+          <h3>
+            <i class="fa-solid fa-comments"></i>
+            Customer Reviews
+          </h3>
+          <form id="reviewForm" class="review-form">
+            <div class="form-control">
+              <label for="reviewName">Your Name</label>
+              <input 
+                type="text" 
+                id="reviewName" 
+                name="name" 
+                required 
+                placeholder="Enter your name"
+              >
+            </div>
+            <div class="form-control">
+              <label for="reviewText">Your Review</label>
+              <textarea 
+                id="reviewText" 
+                name="review" 
+                required 
+                placeholder="Share your experience..."
+              ></textarea>
+            </div>
+            <button type="submit" class="submit-review">
+              <i class="fa-solid fa-paper-plane"></i>
+              Submit Review
+            </button>
+          </form>
+        </div>
+
         <div class="reviews-container">
           ${restaurant.customerReviews.map((review) => `
             <div class="review-card">
               <div class="review-header">
                 <img 
-                  src="https://picsum.photos/seed/${review.name}/50" 
+                  src="https://ui-avatars.com/api/?name=${review.name}&background=random" 
                   alt="${review.name}"
                   class="review-avatar"
-                  loading="lazy"
                 >
                 <div class="review-info">
                   <p class="review-name">${review.name}</p>
@@ -109,4 +138,21 @@ const createRestaurantDetailTemplate = (restaurant) => `
   </div>
 `;
 
-export { createRestaurantItemTemplate, createRestaurantDetailTemplate };
+const createLikeButtonTemplate = () => `
+  <button aria-label="like this restaurant" id="likeButton" class="like">
+    <i class="fa-regular fa-heart" aria-hidden="true"></i>
+  </button>
+`;
+
+const createLikedButtonTemplate = () => `
+  <button aria-label="unlike this restaurant" id="likeButton" class="like">
+    <i class="fa-solid fa-heart" aria-hidden="true"></i>
+  </button>
+`;
+
+export {
+  createRestaurantItemTemplate,
+  createRestaurantDetailTemplate,
+  createLikeButtonTemplate,
+  createLikedButtonTemplate,
+};
