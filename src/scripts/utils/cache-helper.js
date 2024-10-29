@@ -17,8 +17,10 @@ const CacheHelper = {
     const response = await caches.match(request);
 
     if (response) {
-      return this._fetchRequest(request);
+      this._fetchRequest(request);
+      return response;
     }
+
     return this._fetchRequest(request);
   },
 
@@ -27,32 +29,33 @@ const CacheHelper = {
   },
 
   async _fetchRequest(request) {
-    try {
-      const response = await fetch(request);
+    const response = await fetch(request);
 
-      if (!response || response.status !== 200) {
-        return response;
-      }
-
-      if (!request.url.startsWith('chrome-extension')) {
-        await this._addCache(request);
-      }
-
+    if (!response || response.status !== 200) {
       return response;
-    } catch (error) {
-      return new Response('Network error happened', {
-        status: 404,
-        statusText: error,
-      });
     }
+
+    await this._addCache(request);
+    return response;
   },
 
   async _addCache(request) {
-    if (request.url.startsWith('http')) {
-      const cache = await this._openCache();
-      await cache.add(request);
+    if (request.method !== 'GET') {
+      return;
     }
+
+    const cache = await this._openCache();
+
+    const response = await fetch(request);
+    await cache.put(request, response.clone());
+
+    return response;
   },
+
+  async cacheAPIResponse(request, response) {
+    const cache = await this._openCache();
+    await cache.put(request, response.clone());
+  }
 };
 
 export default CacheHelper;

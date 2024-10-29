@@ -1,28 +1,64 @@
 import API_ENDPOINT from '../globals/api-endpoint';
+import CONFIG from '../globals/config';
 
 class RestaurantSource {
   static async list() {
     try {
+      const cache = await caches.open(CONFIG.CACHE_NAME);
+      const cachedResponse = await cache.match(API_ENDPOINT.LIST);
+
+      if (cachedResponse) {
+        const responseJson = await cachedResponse.json();
+        return responseJson.restaurants;
+      }
+
       const response = await fetch(API_ENDPOINT.LIST);
       const responseJson = await response.json();
+
+      if (responseJson.restaurants) {
+        cache.put(
+          API_ENDPOINT.LIST,
+          new Response(JSON.stringify(responseJson))
+        );
+      }
+
       return responseJson.restaurants;
     } catch (error) {
-      throw new Error(error);
+      console.error('Error:', error);
+      return [];
     }
   }
 
   static async detail(id) {
+    const endpoint = API_ENDPOINT.DETAIL(id);
+
     try {
-      const response = await fetch(API_ENDPOINT.DETAIL(id));
+      const cache = await caches.open(CONFIG.CACHE_NAME);
+      const cachedResponse = await cache.match(endpoint);
+
+      if (cachedResponse) {
+        const responseJson = await cachedResponse.json();
+        return responseJson.restaurant;
+      }
+
+      const response = await fetch(endpoint);
       const responseJson = await response.json();
 
       if (responseJson.error) {
         throw new Error(responseJson.message);
       }
 
+      if (responseJson.restaurant) {
+        cache.put(
+          endpoint,
+          new Response(JSON.stringify(responseJson))
+        );
+      }
+
       return responseJson.restaurant;
     } catch (error) {
-      throw new Error(error);
+      console.error('Error:', error);
+      throw new Error('Restaurant not found');
     }
   }
 
@@ -48,7 +84,6 @@ class RestaurantSource {
       throw new Error(error);
     }
   }
-
 }
 
 export default RestaurantSource;

@@ -17,6 +17,7 @@ const Detail = {
   },
 
   async afterRender() {
+    window.scrollTo({ top: 0 });
     try {
       const restaurantContainer = document.querySelector('#restaurant');
       const likeButtonContainer = document.querySelector('#likeButtonContainer');
