@@ -24,7 +24,7 @@ const createRestaurantItemTemplate = (restaurant) => {
           <i class="fa-solid fa-location-dot"></i>
           ${restaurant.city}
         </p>
-        <p class="restaurant-description">${restaurant.description ? `${restaurant.description.slice(0, 100)  }...` : 'No description available'}</p>
+        <p class="restaurant-description">${restaurant.description ? `${restaurant.description.slice(0, 100)}...` : 'No description available'}</p>
       </div>
     </a>
   `;
@@ -72,7 +72,7 @@ const createRestaurantDetailTemplate = (restaurant) => {
         </div>
       </div>
 
-      <div class="detail-content">
+      <div class="detail-content" id="mainContent" tabindex="-1">
         <section class="detail-section">
           <h3><i class="fa-solid fa-utensils"></i> Categories</h3>
           <div class="categories-list">

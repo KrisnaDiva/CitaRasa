@@ -17,6 +17,18 @@ const Detail = {
   },
 
   async afterRender() {
+    const skipLinkElem = document.querySelector('.skip-link');
+    if (skipLinkElem) {
+      skipLinkElem.addEventListener('click', (event) => {
+        event.preventDefault();
+        const mainContent = document.querySelector('#mainContent');
+        if (mainContent) {
+          mainContent.focus();
+          mainContent.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
     window.scrollTo({ top: 0 });
     try {
       const restaurantContainer = document.querySelector('#restaurant');
@@ -76,6 +88,18 @@ const Detail = {
             city: restaurant.city,
           },
         });
+
+        const skipLink = document.querySelector('.skip-link');
+        if (skipLink) {
+          skipLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            const mainContent = document.querySelector('#mainContent');
+            if (mainContent) {
+              mainContent.focus();
+              mainContent.scrollIntoView({ behavior: 'smooth' });
+            }
+          });
+        }
       } else {
         throw new Error('Restaurant not found');
       }

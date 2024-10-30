@@ -1,5 +1,35 @@
+@media screen and (max-width: 480px) {
+  .review-card {
+    margin: 0;
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .reviews-container {
+    padding: 0 1rem;
+    grid-template-columns: 1fr;
+  }
+  
+  .review-header {
+    flex-wrap: wrap;
+  }
+  
+  .review-avatar {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .review-text {
+    font-size: 0.9rem;
+  }
+
+  .customer-review {
+    padding: 1.5rem;
+  }
+}
+
 @media screen and (min-width: 768px) {
-  /* App Bar & Navigation */
   .app-bar-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -41,27 +71,6 @@
     margin: 0;
   }
 
-  .app-bar__navigation a {
-    padding: 24px 16px;
-    font-weight: 500;
-  }
-
-  .app-bar__navigation a:hover {
-    background-color: transparent;
-    color: var(--primary-color);
-  }
-
-  .app-bar__navigation a:hover i {
-    color: var(--primary-color);
-  }
-
-  .app-bar__navigation a.active::after,
-  .app-bar__navigation a:hover::after {
-    bottom: 0;
-    height: 3px;
-  }
-
-  /* Restaurant List */
   .restaurants {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
@@ -71,60 +80,9 @@
   .restaurant-img {
     height: 180px;
   }
-
-  .restaurant-name {
-    font-size: 1.1rem;
-  }
-
-  .restaurant-description {
-    font-size: 0.85rem;
-  }
-
-  /* Detail Page */
-  .detail-hero {
-    height: 45vh;
-    min-height: 350px;
-  }
-
-  .detail-content {
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .menu-container {
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-  
-  .reviews-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  .detail-section {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-  }
 }
 
 @media screen and (min-width: 1024px) {
-  .app-bar-container {
-    padding: 0 4rem;
-  }
-
-  .app-bar__brand h1 {
-    font-size: 32px;
-  }
-
-  .app-bar__navigation ul {
-    gap: 48px;
-  }
-
-  .app-bar__navigation a {
-    font-size: 18px;
-  }
-
   .restaurants {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
@@ -137,15 +95,6 @@
     height: 200px;
   }
 
-  .restaurant-name {
-    font-size: 1.2rem;
-  }
-
-  .restaurant-description {
-    font-size: 0.9rem;
-  }
-
-  /* Detail Page */
   .detail-hero {
     height: 60vh;
   }
@@ -159,29 +108,14 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
-
-  .detail-section {
-    margin-bottom: 2.5rem;
-    padding: 2rem;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .restaurants {
-    padding: 0;
-  }
-
-  .detail-content {
-    padding: 3rem 2rem;
-  }
 }
 
 @media screen and (min-width: 1200px) {
   .hero {
     background-image: url('../public/heros/hero-image_2.jpg');
-      height: 500px;
-      width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
+    height: 500px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
