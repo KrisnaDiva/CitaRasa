@@ -3,6 +3,10 @@ import { createLikeButtonTemplate, createLikedButtonTemplate } from '../views/te
 
 const LikeButtonInitiator = {
   async init({ likeButtonContainer, restaurant }) {
+    if (!restaurant) {
+      throw new Error('restaurant object is required');
+    }
+
     this._likeButtonContainer = likeButtonContainer;
     this._restaurant = restaurant;
 
@@ -11,7 +15,12 @@ const LikeButtonInitiator = {
 
   async _renderButton() {
     try {
-      const { id } = this._restaurant;
+      const { id } = this._restaurant || {};
+
+      if (!id) {
+        this._renderLike();
+        return;
+      }
 
       if (await this._isRestaurantExist(id)) {
         this._renderLiked();
@@ -20,21 +29,28 @@ const LikeButtonInitiator = {
       }
     } catch (error) {
       console.error('Failed to render like button:', error);
-
       this._renderLike();
     }
   },
 
   async _isRestaurantExist(id) {
-    const restaurant = await FavoriteRestaurantIdb.getRestaurant(id);
-    return !!restaurant;
+    try {
+      const restaurant = await FavoriteRestaurantIdb.getRestaurant(id);
+      return Boolean(restaurant);
+    } catch {
+      return false;
+    }
   },
 
   _renderLike() {
     this._likeButtonContainer.innerHTML = createLikeButtonTemplate();
 
     const likeButton = document.querySelector('#likeButton');
-    likeButton.addEventListener('click', async () => {
+    likeButton?.addEventListener('click', async () => {
+      if (!this._restaurant?.id) {
+        return;
+      }
+
       try {
         await FavoriteRestaurantIdb.putRestaurant(this._restaurant);
         this._renderButton();
@@ -48,7 +64,11 @@ const LikeButtonInitiator = {
     this._likeButtonContainer.innerHTML = createLikedButtonTemplate();
 
     const likeButton = document.querySelector('#likeButton');
-    likeButton.addEventListener('click', async () => {
+    likeButton?.addEventListener('click', async () => {
+      if (!this._restaurant?.id) {
+        return;
+      }
+
       try {
         await FavoriteRestaurantIdb.deleteRestaurant(this._restaurant.id);
         this._renderButton();
