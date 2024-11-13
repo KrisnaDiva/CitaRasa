@@ -110,12 +110,18 @@
   }
 }
 
-@media screen and (min-width: 1200px) {
+/* Mobile */
+@media screen and (max-width: 768px) {
   .hero {
-    background-image: url('../public/heros/hero-image_2.jpg');
+    background-image: url('../public/heros/hero-image_2-small.jpg');
+    height: 300px;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 769px) {
+  .hero {
+    background-image: url('../public/heros/hero-image_2-large.jpg');
     height: 500px;
-    width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }

@@ -1,5 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ImageminWebpackPlugin = require('imagemin-webpack-plugin').default;
+const ImageminMozjpeg = require('imagemin-mozjpeg');
 const path = require('path');
 
 module.exports = {
@@ -37,8 +39,24 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'src/public/'),
           to: path.resolve(__dirname, 'dist/'),
+          globOptions: {
+            ignore: ['**/heros/**'], // Abaikan folder heros karena akan dihandle oleh sharp
+          },
+        },
+        {
+          from: path.resolve(__dirname, 'src/public/heros/'),
+          to: path.resolve(__dirname, 'dist/heros/'),
         },
       ],
+    }),
+    new ImageminWebpackPlugin({
+      plugins: [
+        ImageminMozjpeg({
+          quality: 20,
+          progressive: true,
+        }),
+      ],
+      test: /\.jpe?g$/, // Hanya target file jpg/jpeg
     }),
   ],
 };

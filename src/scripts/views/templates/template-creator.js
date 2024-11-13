@@ -6,7 +6,7 @@ const createRestaurantItemTemplate = (restaurant) => {
   return `
     <a href="#/detail/${restaurant.id}" class="restaurant-item">
       <img 
-        src="${imgUrl}" 
+        data-src="${imgUrl}" 
         alt="restoran ${restaurant.name}" 
         class="restaurant-img lazyload"
         loading="lazy"
