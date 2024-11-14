@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import LikeButtonInitiator from '../src/scripts/utils/like-button-initiator';
 import FavoriteRestaurantIdb from '../src/scripts/data/favorite-restaurant-idb';
 
@@ -65,28 +64,20 @@ describe('Unliking A Restaurant', () => {
       name: 'Test Restaurant',
     };
 
-    // Inisialisasi presenter tanpa menyimpan restaurant ke database
     await createLikeButtonPresenterWithRestaurant(restaurant);
     
-    // Cek apakah tombol like muncul (karena restaurant belum disukai)
     expect(document.querySelector('[aria-label="like this restaurant"]')).toBeTruthy();
     
-    // Klik tombol like button
     document.querySelector('#likeButton').dispatchEvent(new Event('click'));
     
-    // Pastikan data ada di database
     expect(await FavoriteRestaurantIdb.getRestaurant(1)).toBeTruthy();
     
-    // Hapus langsung dari database
     await FavoriteRestaurantIdb.deleteRestaurant(1);
     
-    // Pastikan sudah terhapus
     expect(await FavoriteRestaurantIdb.getRestaurant(1)).toBeFalsy();
     
-    // Klik unlike button tidak menyebabkan error
     document.querySelector('#likeButton').dispatchEvent(new Event('click'));
     
-    // Data tetap kosong
     const restaurants = await FavoriteRestaurantIdb.getAllRestaurants();
     expect(restaurants).toHaveLength(0);
   });

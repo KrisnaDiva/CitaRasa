@@ -1,10 +1,7 @@
 const { setHeadlessWhen, setCommonPlugins } = require('@codeceptjs/configure');
 
-// turn on headless mode when running with HEADLESS=true environment variable
-// export HEADLESS=true && npx codeceptjs run
 setHeadlessWhen(process.env.HEADLESS);
 
-// enable all common plugins https://github.com/codeceptjs/configure#setcommonplugins
 setCommonPlugins();
 
 /** @type {CodeceptJS.MainConfig} */
@@ -16,7 +13,7 @@ exports.config = {
       browser: 'chromium',
       url: 'http://localhost:9000',
       show: true,
-      waitForTimeout: 5000 // menambah timeout untuk memastikan elemen sudah dimuat
+      waitForTimeout: 5000
     }
   },
   include: {
@@ -26,7 +23,7 @@ exports.config = {
   plugins: {
     screenshotOnFail: {
       enabled: true,
-      fullPage: true // mengambil screenshot full page
+      fullPage: true 
     }
   }
 };

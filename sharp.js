@@ -12,14 +12,12 @@ if (!fs.existsSync(destination)) {
 fs.readdirSync(target)
   .forEach(image => {
     if (image === 'hero-image_2.jpg') {
-      // Mobile version
       sharp(`${target}/${image}`)
-        .resize(480)  // ukuran untuk mobile
+        .resize(480)  
         .toFile(path.resolve(destination, 'hero-image_2-small.jpg'));
 
-      // Desktop version
       sharp(`${target}/${image}`)
-        .resize(1200) // ukuran untuk desktop
+        .resize(1200) 
         .toFile(path.resolve(destination, 'hero-image_2-large.jpg'));
     }
   });

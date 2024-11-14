@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import LikeButtonInitiator from '../src/scripts/utils/like-button-initiator';
 import FavoriteRestaurantIdb from '../src/scripts/data/favorite-restaurant-idb';
 
@@ -44,13 +43,10 @@ describe('Liking A Restaurant', () => {
   it('should not add a restaurant again when its already liked', async () => {
     await createLikeButtonPresenterWithRestaurant({ id: 1 });
 
-    // Tambahkan restaurant dengan PUT
     await FavoriteRestaurantIdb.putRestaurant({ id: 1 });
 
-    // Simulasi pengguna menekan tombol like
     document.querySelector('#likeButton').dispatchEvent(new Event('click'));
 
-    // Tidak ada restaurant yang ganda
     const restaurants = await FavoriteRestaurantIdb.getAllRestaurants();
     expect(restaurants).toHaveLength(1);
   });

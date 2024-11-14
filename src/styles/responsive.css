@@ -110,7 +110,6 @@
   }
 }
 
-/* Mobile */
 @media screen and (max-width: 768px) {
   .hero {
     background-image: url('../public/heros/hero-image_2-small.jpg');
@@ -118,7 +117,6 @@
   }
 }
 
-/* Desktop */
 @media screen and (min-width: 769px) {
   .hero {
     background-image: url('../public/heros/hero-image_2-large.jpg');
